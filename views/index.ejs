@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("./partials/header.ejs") %>
+<br><br>
+    <main>
+        <div id="search-form">
+            <form method="POST" action="/search">
+                <p>Select fields to fetch:</p>
+                <a onclick="checkboxes()" class="btn">></a>
+                <br><br>
+                <div id="checkboxes">
+                    <input type="checkbox" id="imei-checkbox" name="imei-checkbox" value="imei" checked>
+                    <label for="imei-checkbox">IMEI</label><br>
+                    <input type="checkbox" id="mac-checkbox" name="mac-checkbox" value="mac" checked>
+                    <label for="mac-checkbox">Device MAC</label><br>
+                    <input type="checkbox" id="dom-checkbox" name="dom-checkbox" value="dom" checked>
+                    <label for="dom-checkbox">D.O.M</label><br>
+                    <input type="checkbox" id="lom-checkbox" name="lom-checkbox" value="lom" checked>
+                    <label for="lom-checkbox">L.O.M</label><br>
+                    <input type="checkbox" id="brand-checkbox" name="brand-checkbox" value="brand">
+                    <label for="brand-checkbox">brand</label><br>
+                    <input type="checkbox" id="suffix-checkbox" name="suffix-checkbox" value="suffix">
+                    <label for="suffix-checkbox">Suffix</label><br>
+                    <input type="checkbox" id="jack-checkbox" name="jack-checkbox" value="jack">
+                    <label for="jack-checkbox">Jack</label><br>
+                </div>
+
+                <label for="serviceTags">Enter Service Tag(s):</label>
+                <br>
+                <input type="text" id="serviceTags" name="serviceTags">
+                <br>
+                <button type="submit">SEARCH</button>
+            </form>
+        </div>
+    </main>
+    <script>
+        function checkboxes(){
+            let el = document.getElementById('checkboxes');
+            if(el.style.display == 'none')
+                el.style.display = 'block';
+            else
+            el.style.display = 'none';
+        }
+    </script>
+    <%- include("./partials/footer.ejs") %>
+</html>

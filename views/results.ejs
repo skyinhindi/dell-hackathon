@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("./partials/header.ejs") %>
+<body>
+    <main>
+        <% if(!results.length == 0){ %>
+            <table>
+                <tr>
+                    <th>Service Tag</th>
+                    <th>IMEI</th>
+                    <th>Device MAC</th>
+                    <th>D.O.M</th>
+                    <th>L.O.M</th>
+                    <th>Brand</th>
+                    <th>Suffix</th>
+                    <th>Jack</th>
+                </tr>
+                <%
+                results.forEach(result => {
+                %> 
+                    <tr>
+                        <td> <%-result.serviceTag%> </td>
+                        <td> <%-result.imei%> </td>
+                        <td> <%-result.mac%> </td>
+                        <td> <%-result.dom%> </td>
+                        <td> <%-result.lom%> </td>
+                        <td> <%-result.brand%> </td>
+                        <td> <%-result.suffix%> </td>
+                        <td> <%-result.jack%> </td>
+                    </tr>
+                <%
+                });
+                %>
+            </table>
+            <%}else{ %> 
+                <p>Service Tag: <%-serviceTags%> not found</p>
+            <% } %>
+    </main>
+    <%- include("./partials/footer.ejs") %>
+</body>
+</html>
