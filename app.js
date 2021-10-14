@@ -1,5 +1,6 @@
 const express = require('express');
 const fs = require("fs");
+const bodyParser = require("body-parser");
 const decompress = require("decompress");
 const path = require("path");
 const xml2js = require("xml2js");
@@ -13,6 +14,7 @@ app.set('view engine', 'ejs');
 // middleware & static files
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true,}));
 
 
 app.get('/', (req, res) => {
@@ -27,18 +29,20 @@ app.post('/search', (req, res) => {
     decompress(tag + '.zip', 'dist').then(files => {
       //console.log(files);
       files.forEach(file => {
-        fs.readFileSync("dist/" + file.path, (err, data) => {
+        fs.readFile("dist/" + file.path, (err, data) => {
+          console.log('reading file:' + file.path);
           if(err) 
             console.log(err);
           else{
-            parser.parseString(data, (error, result) => {
-              if(error) 
-                console.log(error)
+            console.log('parsing file data...');
+            parser.parseString(data, (err, result) => {
+              if(err) 
+                console.log(err)
               else{
-                dat = Object.assign(result.root, dat);
-                console.log(dat);
+                //dat = Object.assign(result.root, dat);
+                console.log(result);
               }
-            })
+            });
           }
         });
       });
@@ -50,14 +54,16 @@ app.post('/search', (req, res) => {
 // 404 page
 app.use((req, res) => {
     res.status(404).render('404');
-  });
+});
 
-
-  fs.rmdir("dist", { recursive: true }, (err) => {
-    if (err) {
-        throw err;
+  fs.rmdirSync("dist", {recursive: true,}, (err) => {
+    console.log('line 42');
+    if(err){
+      console.log(err);
     }
-    console.log("deleted!");
+    else{
+      console.log("Dist Deleted!");
+    }
   });
 
 app.listen(process.env.PORT || 3000);

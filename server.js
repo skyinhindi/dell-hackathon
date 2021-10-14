@@ -41,21 +41,7 @@ app.route("/results")
           // console.log(files);
           let dat = {};
           for await (let file of files){
-            if(file.type == "file"){
-              await fs.readFile("dist/" + file.path, (err, data) => {
-                if(err) console.log(err);
-                else{
-                  parser.parseString(data, (error, result) => {
-                    if(error) console.log(error)
-                    else{
-                      // console.log(result.root);
-                      dat = Object.assign(result.root, dat);
-                      console.log("upar wala: ",dat);
-                    }
-                  })
-                }
-              });
-            }
+            
           };
           console.log("dat: ",dat);
           // console.log("f: ",files);
@@ -63,7 +49,6 @@ app.route("/results")
           console.log(key + ".zip not found\n" + error);
         }
     });
-    // res.send(resKeys);
     
 
   fs.rmdir("dist", { recursive: true }, (err) => {
