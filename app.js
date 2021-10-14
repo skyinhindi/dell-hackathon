@@ -41,6 +41,14 @@ app.post('/search', (req, res) => {
               else{
                 //dat = Object.assign(result.root, dat);
                 console.log(result);
+                fs.rmdir("dist", {recursive: true,}, (err) => {
+                  if(err){
+                    console.log(err);
+                  }
+                  else{
+                    console.log("Dist Deleted!");
+                  }
+                });
               }
             });
           }
@@ -56,14 +64,5 @@ app.use((req, res) => {
     res.status(404).render('404');
 });
 
-  fs.rmdirSync("dist", {recursive: true,}, (err) => {
-    console.log('line 42');
-    if(err){
-      console.log(err);
-    }
-    else{
-      console.log("Dist Deleted!");
-    }
-  });
 
 app.listen(process.env.PORT || 3000);
