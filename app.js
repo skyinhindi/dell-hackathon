@@ -41,12 +41,16 @@ app.post('/search', (req, res) => {
               else{
                 //dat = Object.assign(result.root, dat);
                 console.log(result);
-                fs.rmdir("dist", {recursive: true,}, (err) => {
-                  if(err){
-                    console.log(err);
-                  }
-                  else{
-                    console.log("Dist Deleted!");
+                fs.access('dist', (err) => {
+                  if(!err){
+                    fs.rmdir("dist", {recursive: true,}, (err) => {
+                      if(err){
+                        console.log(err);
+                      }
+                      else{
+                        console.log("Dist Deleted!");
+                      }
+                    });
                   }
                 });
               }
