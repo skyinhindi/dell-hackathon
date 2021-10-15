@@ -23,15 +23,14 @@ app.get('/', (req, res) => {
 
 app.post('/search', async (req, res) => {
   let serviceTags = req.body.serviceTags.split(',');
+  let fields = req.body.fields.split(',');
   let results = {};
   console.log(serviceTags);
   for await (let key of serviceTags) {
     try {
       let files = await decompress(key + ".zip", "dist");
       let dat = {};
-      // console.log(files);
       for await (let file of files) {
-        // console.log(file.type == "file" && file.path.substr(file.path.length-3) === "xml")
         if (file.type == "file" && file.path.substr(file.path.length-3) === "xml") {
           let data = await fs.readFileSync("dist/" + file.path);
           data = await parser.parseString(data, (error, result) => {
@@ -46,7 +45,6 @@ app.post('/search', async (req, res) => {
       dat['tag'] = key;
       results[key] = dat;
     } catch (error) {
-      // console.log(error)
       results[key] = "not found";
     }
   }
@@ -59,7 +57,7 @@ app.post('/search', async (req, res) => {
   });
 
   console.log(results);
-  res.render('results', {results, serviceTags});
+  res.render('results', {results, serviceTags, fields});
 });
 
 // 404 page

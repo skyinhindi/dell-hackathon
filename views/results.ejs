@@ -6,27 +6,121 @@
         <% if(!results.length == 0){ %>
             <table>
                 <tr>
-                    <th>Service Tag</th>
+                    <td> <%-result.serviceTag%> </td>
+                    <% if(fields.find('imei' || 'IMEI')){ %>
                     <th>IMEI</th>
+                    <% } %>
+                    <% if(fields.find('mac' || 'MAC' || 'mac address')){ %>
                     <th>Device MAC</th>
+                    <% } %>
+                    <% if(fields.find('brand')){ %>
+                    <th>Brand</th>>
+                    <% } %>
+                    <% if(fields.find('suffix')){ %>
+                    <th>Model Suffix</th>
+                    <% } %>
+                    <% if(fields.find('height')){ %>
+                    <th>Height</th>
+                    <% } %>
+                    <% if(fields.find('width')){ %>
+                    <th>Width</th>
+                    <% } %>
+                    <% if(fields.find('weight')){ %>
+                    <th>Weight</th>
+                    <% } %>
+                    <% if(fields.find('thickness')){ %>
+                    <th>Thickness</th>
+                    <% } %>
+                    <% if(fields.find('dom' || 'DOM')){ %>
                     <th>D.O.M</th>
+                    <% } %>
+                    <% if(fields.find('lom' || 'LOM')){ %>
                     <th>L.O.M</th>
-                    <th>Brand</th>
-                    <th>Suffix</th>
-                    <th>Jack</th>
+                    <% } %>
+                    <% if(fields.find('os')){ %>
+                    <th>OS</th>
+                    <% } %>
+                    <% if(fields.find('cpu')){ %>
+                    <th>CPU</th>
+                    <% } %>
+                    <% if(fields.find('ram')){ %>
+                    <th>RAM</th>
+                    <% } %>
+                    <% if(fields.find('storage')){ %>
+                    <th>Storage</th>
+                    <% } %>
+                    <% if(fields.find('battery')){ %>
+                    <th>Battery Capacity</th>
+                    <% } %>
+                    <% if(fields.find('screensize' || 'screenSize' || 'screen size')){ %>
+                    <th>Screen Size</th>
+                    <% } %>
+                    <% if(fields.find('jack' || 'headphone jack')){ %>
+                    <th>Headphone Jack</th>>
+                    <% } %>
+                    <% if(fields.find('color' || 'colour')){ %>
+                    <th>Color</th>
+                    <% } %>
                 </tr>
                 <%
                 results.forEach(result => {
                 %> 
                     <tr>
                         <td> <%-result.serviceTag%> </td>
+                        <% if(fields.find('imei' || 'IMEI')){ %>
                         <td> <%-result.imei%> </td>
+                        <% } %>
+                        <% if(fields.find('mac' || 'MAC' || 'mac address')){ %>
                         <td> <%-result.mac%> </td>
-                        <td> <%-result.dom%> </td>
-                        <td> <%-result.lom%> </td>
+                        <% } %>
+                        <% if(fields.find('brand')){ %>
                         <td> <%-result.brand%> </td>
+                        <% } %>
+                        <% if(fields.find('suffix')){ %>
                         <td> <%-result.suffix%> </td>
+                        <% } %>
+                        <% if(fields.find('height')){ %>
+                        <td> <%-result.height%> </td>
+                        <% } %>
+                        <% if(fields.find('width')){ %>
+                        <td> <%-result.width%> </td>
+                        <% } %>
+                        <% if(fields.find('weight')){ %>
+                        <td> <%-result.weight%> </td>
+                        <% } %>
+                        <% if(fields.find('thickness')){ %>
+                        <td> <%-result.thickness%> </td>
+                        <% } %>
+                        <% if(fields.find('dom' || 'DOM')){ %>
+                        <td> <%-result.dom%> </td>
+                        <% } %>
+                        <% if(fields.find('lom' || 'LOM')){ %>
+                        <td> <%-result.lom%> </td>
+                        <% } %>
+                        <% if(fields.find('os')){ %>
+                        <td> <%-result.os%> </td>
+                        <% } %>
+                        <% if(fields.find('cpu')){ %>
+                        <td> <%-result.cpu%> </td>
+                        <% } %>
+                        <% if(fields.find('ram')){ %>
+                        <td> <%-result.ram%> </td>
+                        <% } %>
+                        <% if(fields.find('storage')){ %>
+                        <td> <%-result.storage%> </td>
+                        <% } %>
+                        <% if(fields.find('battery')){ %>
+                        <td> <%-result.battery%> </td>
+                        <% } %>
+                        <% if(fields.find('screensize' || 'screenSize' || 'screen size')){ %>
+                        <td> <%-result.screenSize%> </td>
+                        <% } %>
+                        <% if(fields.find('jack' || 'headphone jack')){ %>
                         <td> <%-result.jack%> </td>
+                        <% } %>
+                        <% if(fields.find('color' || 'colour')){ %>
+                        <td> <%-result.color%> </td>
+                        <% } %>
                     </tr>
                 <%
                 });
