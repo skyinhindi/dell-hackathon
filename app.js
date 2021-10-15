@@ -21,45 +21,44 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-app.post('/search', (req, res) => {
+app.post('/search', async (req, res) => {
   let serviceTags = req.body.serviceTags.split(',');
   let results = {};
   console.log(serviceTags);
-  serviceTags.forEach(tag => {
-    decompress(tag + '.zip', 'dist').then(files => {
-      //console.log(files);
-      files.forEach(file => {
-        fs.readFile("dist/" + file.path, (err, data) => {
-          console.log('reading file:' + file.path);
-          if(err) 
-            console.log(err);
-          else{
-            console.log('parsing file data...');
-            parser.parseString(data, (err, result) => {
-              if(err) 
-                console.log(err)
-              else{
-                //dat = Object.assign(result.root, dat);
-                console.log(result);
-                fs.access('dist', (err) => {
-                  if(!err){
-                    fs.rmdir("dist", {recursive: true,}, (err) => {
-                      if(err){
-                        console.log(err);
-                      }
-                      else{
-                        console.log("Dist Deleted!");
-                      }
-                    });
-                  }
-                });
-              }
-            });
-          }
-        });
-      });
-    });
+  for await (let key of serviceTags) {
+    try {
+      let files = await decompress(key + ".zip", "dist");
+      let dat = {};
+      // console.log(files);
+      for await (let file of files) {
+        // console.log(file.type == "file" && file.path.substr(file.path.length-3) === "xml")
+        if (file.type == "file" && file.path.substr(file.path.length-3) === "xml") {
+          let data = await fs.readFileSync("dist/" + file.path);
+          data = await parser.parseString(data, (error, result) => {
+            if (error) console.log(error);
+            else {
+              console.log(result.root);
+              dat = Object.assign(result.root, dat);
+            }
+          });
+        }
+      }
+      dat['tag'] = key;
+      results[key] = dat;
+    } catch (error) {
+      // console.log(error)
+      results[key] = "not found";
+    }
+  }
+
+  fs.rmdir("dist", { recursive: true }, (err) => {
+    if (err) {
+      throw err;
+    }
+    console.log("dist deleted!");
   });
+
+  console.log(results);
   res.render('results', {results, serviceTags});
 });
 
