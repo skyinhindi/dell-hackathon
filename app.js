@@ -98,13 +98,6 @@ app.post("/search/field", async (req, res) => {
     }
   }
 
-  fs.rmdir("dist", { recursive: true }, (err) => {
-    if (err) {
-      throw err;
-    }
-    console.log("dist deleted!");
-  });
-
   let results2 = {};
   for (let key in results){
     let obj = results[key];
