@@ -49,6 +49,21 @@ main{
     padding: 40px;
 }
 
+
+table, th, td{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td{
+    padding: 3px;
+}
+
+th{
+    background-color: var(--color-primary);
+    color: #fff;
+}
+
 button, .btn{
     background-color: var(--color-secondary);
     color: #fff;

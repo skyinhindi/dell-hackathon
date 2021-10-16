@@ -3,96 +3,45 @@
 <%- include("./partials/header.ejs") %>
 <body>
     <main>
-        <% if(!results.length == 0){ %>
             <table>
                 <tr>
-                    <td> <%-reqBody.serviceTag%> </td>
-                    <% if(reqBody.indexOf('imei') > -1){ %>
-                    <th>IMEI</th>
-                    <% } %>
-                    <% if(reqBody.indexOf('mac') > -1){ %>
-                    <th>Device MAC</th>
-                    <% } %>
-                    <% if(reqBody.indexOf('brand') > -1){ %>
-                    <th>Brand</th>>
-                    <% } %>
-                    <% if(reqBody.indexOf('suffix') > -1){ %>
-                    <th>Model Suffix</th>
-                    <% } %>
-                    <% if(reqBody.indexOf('height') > -1){ %>
-                    <th>Height</th>
-                    <% } %>
-                    <% if(reqBody.indexOf('width') > -1){ %>
-                    <th>Width</th>
-                    <% } %>
-                    <% if(reqBody.indexOf('dom') > -1){ %>
-                    <th>D.O.M</th>
-                    <% } %>
-                    <% if(reqBody.indexOf('lom') > -1){ %>
-                    <th>L.O.M</th>
-                    <% } %>
-                    <% if(reqBody.indexOf('cpu') > -1){ %>
-                    <th>CPU</th>
-                    <% } %>
-                    <% if(reqBody.indexOf('ram') > -1){ %>
-                    <th>RAM</th>
-                    <% } %>
-                    <% if(reqBody.indexOf('screen') > -1){ %>
-                    <th>Screen Size</th>
-                    <% } %>
-                    <% if(reqBody.indexOf('color') > -1){ %>
-                    <th>Color</th>
-                    <% } %>
+                <%
+                    for (var key in results) {
+                        if (results.hasOwnProperty(key)) {
+                            for(var field in results[key]){
+                            %>
+                                <th><%- field %></th>
+                            <%
+                            }
+                            break;
+                        }
+                    }
+                %>
                 </tr>
+                
                 <%
-                results.forEach(result => {
-                %> 
-                    <tr>
-                        <td> <%-result.serviceTag%> </td>
-                        <% if(reqBody.indexOf('imei') > -1){ %>
-                        <td> <%-result.imei%> </td>
-                        <% } %>
-                        <% if(reqBody.indexOf('mac') > -1){ %>
-                        <td> <%-result.mac%> </td>
-                        <% } %>
-                        <% if(reqBody.indexOf('brand') > -1){ %>
-                        <td> <%-result.brand%> </td>
-                        <% } %>
-                        <% if(reqBody.indexOf('suffix') > -1){ %>
-                        <td> <%-result.suffix%> </td>
-                        <% } %>
-                        <% if(reqBody.indexOf('height') > -1){ %>
-                        <td> <%-result.height%> </td>
-                        <% } %>
-                        <% if(reqBody.indexOf('width') > -1){ %>
-                        <td> <%-result.width%> </td>
-                        <% } %>
-                        <% if(reqBody.indexOf('dom') > -1){ %>
-                        <td> <%-result.dom%> </td>
-                        <% } %>
-                        <% if(reqBody.indexOf('lom') > -1){ %>
-                        <td> <%-result.lom%> </td>
-                        <% } %>
-                        <% if(reqBody.indexOf('cpu') > -1){ %>
-                        <td> <%-result.cpu%> </td>
-                        <% } %>
-                        <% if(reqBody.indexOf('ram') > -1){ %>
-                        <td> <%-result.ram%> </td>
-                        <% } %>
-                        <% if(reqBody.indexOf('screen') > -1){ %>
-                        <td> <%-result.screenSize%> </td>
-                        <% } %>
-                        <% if(reqBody.indexOf('color') > -1){ %>
-                        <td> <%-result.color%> </td>
-                        <% } %>
-                    </tr>
-                <%
-                });
+                    for (var key in results) {
+                        %><tr><%
+                        if (results.hasOwnProperty(key)) {
+                            for(var value in results[key]){
+                                if(results[key] != 'not found'){
+                                %>
+                                    <td><%- results[key][value] %></td>
+                                <%
+                                }
+                                else{
+                                %>
+                                    <td>Service Tag : <%- key %> not found</td>
+                                <%
+                                break;
+                                }
+                            }
+                        }
+                        else
+                        %></tr><%
+                    }
                 %>
             </table>
-            <%}else{ %> 
-                <p>Service Tag: <%-serviceTags%> not found</p>
-            <% } %>
     </main>
     <%- include("./partials/footer.ejs") %>
 </body>

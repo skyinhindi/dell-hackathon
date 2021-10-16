@@ -21,6 +21,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/search", async (req, res) => {
+  req.body.serviceTags.replace(/\s+/g, '');
   let serviceTags = req.body.serviceTags.split(",");
    //get checked fields and convert to array
    let reqBody = [];
@@ -38,10 +39,10 @@ app.post("/search", async (req, res) => {
         ) {
           await fs.readFile("dist/" + file.path).then((data) => {
             parser.parseString(data, (error, result) => {
-              if (error) console.log(error);
-              else {
+              if (error)
+                console.log(error);
+              else
                 dat = Object.assign(result.root, dat);
-              }
             });
           });
         }
@@ -49,7 +50,7 @@ app.post("/search", async (req, res) => {
       dat["tag"] = key;
       results[key] = dat;
     } catch (error) {
-      results[key] = "not found";
+      results[key] = 'not found';
     }
   }
 
@@ -59,8 +60,8 @@ app.post("/search", async (req, res) => {
     }
     console.log("dist deleted!");
   });
-
-  console.log('Results\n' + results);
+  console.log('Results:');
+  console.log(results);
   res.render("results", { results, serviceTags, reqBody });
 });
 
