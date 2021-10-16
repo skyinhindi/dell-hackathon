@@ -22,10 +22,14 @@ app.get('/', (req, res) => {
 });
 
 app.post('/search', async (req, res) => {
+  //get checked fields and convert to array
+  let reqBody = [];
+  for(var i in req.body)
+    reqBody.push([i, req.body [i]]);
+
   let serviceTags = req.body.serviceTags.split(',');
-  let fields = req.body.fields.split(',');
-  let results = {};
-  console.log(serviceTags);
+  let results = [1, 2];
+
   for await (let key of serviceTags) {
     try {
       let files = await decompress(key + ".zip", "dist");
@@ -56,8 +60,8 @@ app.post('/search', async (req, res) => {
     console.log("dist deleted!");
   });
 
-  console.log(results);
-  res.render('results', {results, serviceTags, fields});
+  //console.log(results);
+  res.render('results', {results, reqBody, serviceTags});
 });
 
 // 404 page

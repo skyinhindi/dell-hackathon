@@ -6,59 +6,41 @@
         <% if(!results.length == 0){ %>
             <table>
                 <tr>
-                    <td> <%-result.serviceTag%> </td>
-                    <% if(fields.find('imei' || 'IMEI')){ %>
+                    <td> <%-reqBody.serviceTag%> </td>
+                    <% if(reqBody.indexOf('imei') > -1){ %>
                     <th>IMEI</th>
                     <% } %>
-                    <% if(fields.find('mac' || 'MAC' || 'mac address')){ %>
+                    <% if(reqBody.indexOf('mac') > -1){ %>
                     <th>Device MAC</th>
                     <% } %>
-                    <% if(fields.find('brand')){ %>
+                    <% if(reqBody.indexOf('brand') > -1){ %>
                     <th>Brand</th>>
                     <% } %>
-                    <% if(fields.find('suffix')){ %>
+                    <% if(reqBody.indexOf('suffix') > -1){ %>
                     <th>Model Suffix</th>
                     <% } %>
-                    <% if(fields.find('height')){ %>
+                    <% if(reqBody.indexOf('height') > -1){ %>
                     <th>Height</th>
                     <% } %>
-                    <% if(fields.find('width')){ %>
+                    <% if(reqBody.indexOf('width') > -1){ %>
                     <th>Width</th>
                     <% } %>
-                    <% if(fields.find('weight')){ %>
-                    <th>Weight</th>
-                    <% } %>
-                    <% if(fields.find('thickness')){ %>
-                    <th>Thickness</th>
-                    <% } %>
-                    <% if(fields.find('dom' || 'DOM')){ %>
+                    <% if(reqBody.indexOf('dom') > -1){ %>
                     <th>D.O.M</th>
                     <% } %>
-                    <% if(fields.find('lom' || 'LOM')){ %>
+                    <% if(reqBody.indexOf('lom') > -1){ %>
                     <th>L.O.M</th>
                     <% } %>
-                    <% if(fields.find('os')){ %>
-                    <th>OS</th>
-                    <% } %>
-                    <% if(fields.find('cpu')){ %>
+                    <% if(reqBody.indexOf('cpu') > -1){ %>
                     <th>CPU</th>
                     <% } %>
-                    <% if(fields.find('ram')){ %>
+                    <% if(reqBody.indexOf('ram') > -1){ %>
                     <th>RAM</th>
                     <% } %>
-                    <% if(fields.find('storage')){ %>
-                    <th>Storage</th>
-                    <% } %>
-                    <% if(fields.find('battery')){ %>
-                    <th>Battery Capacity</th>
-                    <% } %>
-                    <% if(fields.find('screensize' || 'screenSize' || 'screen size')){ %>
+                    <% if(reqBody.indexOf('screen') > -1){ %>
                     <th>Screen Size</th>
                     <% } %>
-                    <% if(fields.find('jack' || 'headphone jack')){ %>
-                    <th>Headphone Jack</th>>
-                    <% } %>
-                    <% if(fields.find('color' || 'colour')){ %>
+                    <% if(reqBody.indexOf('color') > -1){ %>
                     <th>Color</th>
                     <% } %>
                 </tr>
@@ -67,58 +49,40 @@
                 %> 
                     <tr>
                         <td> <%-result.serviceTag%> </td>
-                        <% if(fields.find('imei' || 'IMEI')){ %>
+                        <% if(reqBody.indexOf('imei') > -1){ %>
                         <td> <%-result.imei%> </td>
                         <% } %>
-                        <% if(fields.find('mac' || 'MAC' || 'mac address')){ %>
+                        <% if(reqBody.indexOf('mac') > -1){ %>
                         <td> <%-result.mac%> </td>
                         <% } %>
-                        <% if(fields.find('brand')){ %>
+                        <% if(reqBody.indexOf('brand') > -1){ %>
                         <td> <%-result.brand%> </td>
                         <% } %>
-                        <% if(fields.find('suffix')){ %>
+                        <% if(reqBody.indexOf('suffix') > -1){ %>
                         <td> <%-result.suffix%> </td>
                         <% } %>
-                        <% if(fields.find('height')){ %>
+                        <% if(reqBody.indexOf('height') > -1){ %>
                         <td> <%-result.height%> </td>
                         <% } %>
-                        <% if(fields.find('width')){ %>
+                        <% if(reqBody.indexOf('width') > -1){ %>
                         <td> <%-result.width%> </td>
                         <% } %>
-                        <% if(fields.find('weight')){ %>
-                        <td> <%-result.weight%> </td>
-                        <% } %>
-                        <% if(fields.find('thickness')){ %>
-                        <td> <%-result.thickness%> </td>
-                        <% } %>
-                        <% if(fields.find('dom' || 'DOM')){ %>
+                        <% if(reqBody.indexOf('dom') > -1){ %>
                         <td> <%-result.dom%> </td>
                         <% } %>
-                        <% if(fields.find('lom' || 'LOM')){ %>
+                        <% if(reqBody.indexOf('lom') > -1){ %>
                         <td> <%-result.lom%> </td>
                         <% } %>
-                        <% if(fields.find('os')){ %>
-                        <td> <%-result.os%> </td>
-                        <% } %>
-                        <% if(fields.find('cpu')){ %>
+                        <% if(reqBody.indexOf('cpu') > -1){ %>
                         <td> <%-result.cpu%> </td>
                         <% } %>
-                        <% if(fields.find('ram')){ %>
+                        <% if(reqBody.indexOf('ram') > -1){ %>
                         <td> <%-result.ram%> </td>
                         <% } %>
-                        <% if(fields.find('storage')){ %>
-                        <td> <%-result.storage%> </td>
-                        <% } %>
-                        <% if(fields.find('battery')){ %>
-                        <td> <%-result.battery%> </td>
-                        <% } %>
-                        <% if(fields.find('screensize' || 'screenSize' || 'screen size')){ %>
+                        <% if(reqBody.indexOf('screen') > -1){ %>
                         <td> <%-result.screenSize%> </td>
                         <% } %>
-                        <% if(fields.find('jack' || 'headphone jack')){ %>
-                        <td> <%-result.jack%> </td>
-                        <% } %>
-                        <% if(fields.find('color' || 'colour')){ %>
+                        <% if(reqBody.indexOf('color') > -1){ %>
                         <td> <%-result.color%> </td>
                         <% } %>
                     </tr>

@@ -5,9 +5,37 @@
     <main>
         <div id="search-form">
             <form method="POST" action="/search">
-                <label for="fields">Enter field(s) to fetch:</label>
-                <br>
-                <input type="text" id="fields" name="fields">
+                <p>Select fields to fetch:</p>
+                <!-- <a onclick="checkboxes()" class="btn">></a>
+                <br><br> -->
+                <div id="checkboxes">
+                    <input type="checkbox" id="imei" name="imei" value="imei">
+                    <label for="imei" class="checkbox-label">IMEI</label>
+                    <input type="checkbox" id="mac" name="mac" value="mac">
+                    <label for="mac" class="checkbox-label">Device MAC</label>
+                    <input type="checkbox" id="dom" name="dom" value="dom">
+                    <label for="dom" class="checkbox-label">D.O.M</label>
+                    <input type="checkbox" id="lom" name="lom" value="lom">
+                    <label for="lom" class="checkbox-label">L.O.M</label>
+                    <input type="checkbox" id="brand" name="brand" value="brand">
+                    <label for="brand" class="checkbox-label">Brand</label>
+                    <input type="checkbox" id="suffix" name="suffix" value="suffix">
+                    <label for="suffix" class="checkbox-label">Model Suffix</label>
+                    <br>
+                    <input type="checkbox" id="height" name="height" value="height">
+                    <label for="height" class="checkbox-label">Height</label>
+                    <input type="checkbox" id="width" name="width" value="weight">
+                    <label for="width" class="checkbox-label">Width</label>
+                    <input type="checkbox" id="cpu" name="cpu" value="cpu">
+                    <label for="cpu class="checkbox-label"">CPU</label>
+                    <input type="checkbox" id="ram" name="ram" value="ram">
+                    <label for="ram" class="checkbox-label">RAM</label>
+                    <input type="checkbox" id="screen" name="screen" value="screen">
+                    <label for="screen" class="checkbox-label">Screen Size</label>
+                    <input type="checkbox" id="color" name="color" value="color">
+                    <label for="color" class="checkbox-label">Color</label>
+                </div>
+
                 <br>
                 <label for="serviceTags">Enter Service Tag(s):</label>
                 <br>
@@ -17,5 +45,14 @@
             </form>
         </div>
     </main>
+    <script>
+        function checkboxes(){
+            let el = document.getElementById('checkboxes');
+            if(el.style.display == 'none')
+                el.style.display = 'block';
+            else
+            el.style.display = 'none';
+        }
+    </script>
     <%- include("./partials/footer.ejs") %>
 </html>

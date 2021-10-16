@@ -46,6 +46,11 @@ button, .btn{
     cursor: pointer;
 }
 
+.checkbox-label{
+    position: relative;
+    left: -10px;
+}
+
 #search-form  *{
     margin: 5px;
 }
@@ -55,6 +60,6 @@ button, .btn{
     height: 40px;
 }
 
-#checkboxes{
+/* #checkboxes{
     display: none;
-}
+} */
