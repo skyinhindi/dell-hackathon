@@ -21,8 +21,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/search", async (req, res) => {
-  req.body.serviceTags.replace(/\s+/g, '');
-  let serviceTags = req.body.serviceTags.split(",");
+  let serviceTags = req.body.serviceTags.replace(/\s/g, "").split(",");
    //get checked fields and convert to array
    let reqBody = [];
    for(var i in req.body)
