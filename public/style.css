@@ -51,12 +51,13 @@ main{
 
 
 table, th, td{
+    font-size: 0.75rem;
     border: 1px solid black;
     border-collapse: collapse;
 }
 
 th, td{
-    padding: 3px;
+    padding: 2.5px;
 }
 
 th{
@@ -93,6 +94,6 @@ button, .btn{
     padding: 4px;
 }
 
-/* #checkboxes{
-    display: none;
-} */
+.error{
+    color:red;
+}
