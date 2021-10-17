@@ -3,8 +3,9 @@
 <%- include("./partials/header.ejs") %>
 <body>
     <main>
-            <table>
+            <table id="results-table">
                 <tr>
+                    <th>Service Tag</th>
                 <%
                     for (var key in results) {
                         if (results.hasOwnProperty(key)) {
@@ -23,7 +24,10 @@
                 
                 <%
                     for (var key in results) {
-                        %><tr><%
+                        %>
+                        <tr>
+                            <td><%- key %></td>
+                        <%
                         if (results.hasOwnProperty(key)) {
                             for(var value in results[key]){
                                 if(results[key] != 'not found'){
@@ -35,7 +39,7 @@
                                 }
                                 else{
                                 %>
-                                    <td class="error">Service Tag : <%- key %> not found</td>
+                                    <td class="error">not found</td>
                                 <%
                                 break;
                                 }
@@ -45,8 +49,30 @@
                         %></tr><%
                     }
                 %>
-            </table>
+            </table> 
     </main>
+    <div class="export"><button onclick="exportToExcel()">Export To Excel File</button></div>
+    <script>
+        function exportToExcel() {
+            var downloadurl;
+            var dataFileType = 'application/vnd.ms-excel';
+            var tableSelect = document.getElementById('results-table');
+            var tableHTMLData = tableSelect.outerHTML.replace(/ /g, '%20');
+            filename = 'searchResults.xls';
+            downloadurl = document.createElement("a");
+            document.body.appendChild(downloadurl);
+            if (navigator.msSaveOrOpenBlob) {
+                var blob = new Blob(['\ufeff', tableHTMLData], {
+                    type: dataFileType
+                });
+                navigator.msSaveOrOpenBlob(blob, filename);
+            } else {
+                downloadurl.href = 'data:' + dataFileType + ', ' + tableHTMLData;
+                downloadurl.download = filename;
+                downloadurl.click();
+            }
+        }
+
+    </script>
     <%- include("./partials/footer.ejs") %>
-</body>
 </html>

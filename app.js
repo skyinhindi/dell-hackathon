@@ -20,16 +20,18 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.get("/search-by-attribute", (req, res) => {
+  res.render("searchByAttribute");
+});
+
 app.post("/search", async (req, res) => {
   let serviceTags = req.body.serviceTags.replace(/\s/g, "").split(",");
    //get checked fields and convert to array
    let reqBody = req.body;
-   reqBody['service tag'] = true;
-   console.log(reqBody);
   let results = {};
   for await (let key of serviceTags) {
     try {
-      let files = await decompress(key + ".zip", "dist");
+      let files = await decompress("zips/" + key + ".zip", "dist");
       let dat = {};
       for await (let file of files) {
         if (
@@ -64,7 +66,6 @@ app.post("/search", async (req, res) => {
   res.render("results", { results, serviceTags, reqBody });
 });
 
-
 app.post("/search/field", async (req, res) => {
   let dir  = fs.readdirSync("./").filter(file => {
     return file.substr(file.length-4) === ".zip";
@@ -93,10 +94,20 @@ app.post("/search/field", async (req, res) => {
       }
       dat["tag"] = key;
       results[key] = dat;
+      console.log(results);
     } catch (error) {
       results[key] = "not found";
     }
   }
+
+  // console.log("before: ",results);
+
+  fs.rmdir("dist", { recursive: true }, (err) => {
+    if (err) {
+      throw err;
+    }
+    console.log("dist deleted!");
+  });
 
   let results2 = {};
   for (let key in results){
@@ -107,7 +118,7 @@ app.post("/search/field", async (req, res) => {
   }
 
   console.log(results2)
-  res.send("done");
+  res.send(results2);
 });
 
 // 404 page

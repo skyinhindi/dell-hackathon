@@ -1,10 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200;400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Yantramanav:wght@900&display=swap');
 
 :root{
     /* --color-primary: #78D616; */
     --color-primary: #2196F3;
     --color-secondary:#FBAF00;
+    --anchor-color:#fff;
 }
 
 *{
@@ -26,11 +27,25 @@ header{
     font-family: 'Yantramanav', sans-serif;
     width: 100vw;
     height: 100%;
-    background-color: var(--color-primary);
-    color: #fff;
-    padding: 20px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    /* background-color: var(--color-primary); */
+    color: var(--color-primary);
+    padding: 15px;
+    /* border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px; */
+    box-shadow: 1px 1px 1px rgb(143, 142, 142);
+}
+
+header a{
+    text-decoration: none;
+    color: var(--color-primary);
+    text-align: right;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 200;
+    margin-right: 4px;
+}
+
+header a:hover{
+    color: #2195f3a6;
 }
 
 footer{
@@ -49,15 +64,14 @@ main{
     padding: 40px;
 }
 
-
 table, th, td{
-    font-size: 0.75rem;
-    border: 1px solid black;
+    font-size: 0.9rem;
+    border: 1px solid var(--color-primary);
     border-collapse: collapse;
 }
 
 th, td{
-    padding: 2.5px;
+    padding: 3.5px;
 }
 
 th{
@@ -65,13 +79,25 @@ th{
     color: #fff;
 }
 
+td{
+    font-family: 'Times New Roman', serif;
+    color: #000;
+}
+
 button, .btn{
     background-color: var(--color-secondary);
     color: #fff;
     outline: none;
     border: none;
-    padding: 3px;
+    padding: 5px;
     cursor: pointer;
+    display: block;
+}
+
+.export{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .checkbox-label{
@@ -96,4 +122,5 @@ button, .btn{
 
 .error{
     color:red;
+    border-right: none;
 }
