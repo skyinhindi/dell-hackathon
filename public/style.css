@@ -2,10 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Yantramanav:wght@900&display=swap');
 
 :root{
-    /* --color-primary: #78D616; */
     --color-primary: #2196F3;
-    --color-secondary:#FBAF00;
-    --anchor-color:#fff;
+    --color-secondary:#FFCB47;
 }
 
 *{
@@ -27,11 +25,8 @@ header{
     font-family: 'Yantramanav', sans-serif;
     width: 100vw;
     height: 100%;
-    /* background-color: var(--color-primary); */
     color: var(--color-primary);
     padding: 15px;
-    /* border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px; */
     box-shadow: 1px 1px 1px rgb(143, 142, 142);
 }
 
@@ -40,7 +35,7 @@ header a{
     color: var(--color-primary);
     text-align: right;
     font-family: 'Raleway', sans-serif;
-    font-weight: 200;
+    font-weight: 400;
     margin-right: 4px;
 }
 
@@ -94,7 +89,7 @@ button, .btn{
     display: block;
 }
 
-.export{
+.flexbox{
     display: flex;
     align-items: center;
     justify-content: center;

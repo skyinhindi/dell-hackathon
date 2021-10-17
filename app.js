@@ -31,7 +31,7 @@ app.post("/search", async (req, res) => {
   let results = {};
   for await (let key of serviceTags) {
     try {
-      let files = await decompress("zips/" + key + ".zip", "dist");
+      let files = await decompress(key + ".zip", "dist");
       let dat = {};
       for await (let file of files) {
         if (
@@ -63,15 +63,16 @@ app.post("/search", async (req, res) => {
   });
   console.log('Results:');
   console.log(results);
-  res.render("results", { results, serviceTags, reqBody });
+  res.render("results", { results, reqBody });
 });
 
 app.post("/search/field", async (req, res) => {
-  let dir  = fs.readdirSync("./zips/").filter(file => {
+  let dir  = fs.readdirSync("./").filter(file => {
     return file.substr(file.length-4) === ".zip";
   });
   const field = req.body.field;
   const val = req.body.val;
+  let reqBody = req.body;
   let results = {};
   for await (let key of dir) {
     try {
@@ -94,13 +95,11 @@ app.post("/search/field", async (req, res) => {
       }
       dat["tag"] = key;
       results[key] = dat;
-      console.log(results);
     } catch (error) {
       results[key] = "not found";
     }
   }
 
-  // console.log("before: ",results);
 
   fs.rmdir("dist", { recursive: true }, (err) => {
     if (err) {
@@ -117,8 +116,7 @@ app.post("/search/field", async (req, res) => {
     }
   }
 
-  console.log(results2)
-  res.send(results2);
+  res.render("results-alt", {results2, val, field, reqBody});
 });
 
 // 404 page

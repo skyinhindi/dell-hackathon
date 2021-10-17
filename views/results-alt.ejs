@@ -2,24 +2,21 @@
 <html lang="en">
 <%- include("./partials/header.ejs") %>
 <body>
+    <br><br>
+    <div class="flexbox"><p>Result for <%-field%>:<%-val%></p></div>
     <main>
-            <table id="results-table">
+            <table id="results-table-alt">
                 <tr>
-                    <th>Service Tag</th>
                 <%
-                    for (var key in results) {
-                        if (results.hasOwnProperty(key)) {
-                            for(var field in results[key]){
+                    for (var key in results2) {
+                        if (results2.hasOwnProperty(key)) {
+                            for(var field in results2[key]){
                                 if(field in reqBody){
                                 %>
                                     <th><%- field %></th>
                                 <%
                                 }
-                                else{
-                                    continue;
-                                }
                             }
-                            if(results[key] != 'not found')
                             break;
                         }
                     }
@@ -27,23 +24,22 @@
                 </tr>
                 
                 <%
-                    for (var key in results) {
+                    for (var key in results2) {
                         %>
                         <tr>
-                            <td><%- key %></td>
                         <%
-                        if (results.hasOwnProperty(key)) {
-                            for(var value in results[key]){
-                                if(results[key] != 'not found'){
+                        if (results2.hasOwnProperty(key)) {
+                            for(var value in results2[key]){
+                                if(results2[key] != 'not found'){
                                     if(value in reqBody){
                                     %>
-                                        <td><%- results[key][value] %></td>
+                                        <td><%- results2[key][value] %></td>
                                     <%
                                     }
                                 }
                                 else{
                                 %>
-                                    <td class="error">not found</td>
+                                    <td class="error"><%-field%>:<%-val%> not found</td>
                                 <%
                                 break;
                                 }
@@ -60,9 +56,9 @@
         function exportToExcel() {
             var downloadurl;
             var dataFileType = 'application/vnd.ms-excel';
-            var tableSelect = document.getElementById('results-table');
+            var tableSelect = document.getElementById('results-table-alt');
             var tableHTMLData = tableSelect.outerHTML.replace(/ /g, '%20');
-            filename = 'searchResults.xls';
+            filename = 'searchresults2.xls';
             downloadurl = document.createElement("a");
             document.body.appendChild(downloadurl);
             if (navigator.msSaveOrOpenBlob) {
