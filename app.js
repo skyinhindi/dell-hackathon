@@ -67,7 +67,7 @@ app.post("/search", async (req, res) => {
 });
 
 app.post("/search/field", async (req, res) => {
-  let dir  = fs.readdirSync("./").filter(file => {
+  let dir  = fs.readdirSync("./zips/").filter(file => {
     return file.substr(file.length-4) === ".zip";
   });
   const field = req.body.field;
