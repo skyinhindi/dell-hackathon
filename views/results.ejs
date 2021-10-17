@@ -9,9 +9,11 @@
                     for (var key in results) {
                         if (results.hasOwnProperty(key)) {
                             for(var field in results[key]){
-                            %>
-                                <th><%- field %></th>
-                            <%
+                                if(field in reqBody){
+                                %>
+                                    <th><%- field %></th>
+                                <%
+                                }
                             }
                             break;
                         }
@@ -25,9 +27,11 @@
                         if (results.hasOwnProperty(key)) {
                             for(var value in results[key]){
                                 if(results[key] != 'not found'){
-                                %>
-                                    <td><%- results[key][value] %></td>
-                                <%
+                                    if(value in reqBody){
+                                    %>
+                                        <td><%- results[key][value] %></td>
+                                    <%
+                                    }
                                 }
                                 else{
                                 %>

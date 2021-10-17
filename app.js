@@ -23,9 +23,9 @@ app.get("/", (req, res) => {
 app.post("/search", async (req, res) => {
   let serviceTags = req.body.serviceTags.replace(/\s/g, "").split(",");
    //get checked fields and convert to array
-   let reqBody = [];
-   for(var i in req.body)
-     reqBody.push([i, req.body [i]]);
+   let reqBody = req.body;
+   reqBody['service tag'] = true;
+   console.log(reqBody);
   let results = {};
   for await (let key of serviceTags) {
     try {
@@ -46,7 +46,7 @@ app.post("/search", async (req, res) => {
           });
         }
       }
-      dat["tag"] = key;
+      dat["service tag"] = key;
       results[key] = dat;
     } catch (error) {
       results[key] = 'not found';
